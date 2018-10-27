@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       power: true,
       volume: 5,
-      screenInput: 'xxx',
+      screenInput: 'FCC Drum Machine!',
       soundBank: [
         {
           key: 'Q',
@@ -54,8 +54,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div id='display' className='flex-container'>
-          <h1>FCC Drum Machine!</h1>
+      <div id='drum-machine' className='container'>
           <Display screenInput={this.state.screenInput}/>
           <Controls power={this.state.power} volume={this.state.volume}/>
           <SoundPads soundBank={this.state.soundBank}/>

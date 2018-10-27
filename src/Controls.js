@@ -2,7 +2,7 @@ import React from 'react';
 
 const Controls = (props) => {
     return (
-        <div>
+        <div className='controls'>
             <h2>power: {props.power.toString()} volume: {props.volume}</h2>
         </div>
     );

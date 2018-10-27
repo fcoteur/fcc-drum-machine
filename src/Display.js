@@ -2,7 +2,7 @@ import React from 'react';
 
 const Display = (props) => {
     return (
-        <div>
+        <div className='display'>
             <h2>{props.screenInput}</h2>
         </div>
     );
