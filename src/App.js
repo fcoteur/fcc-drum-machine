@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 
-import Display from './Display';
-import Controls from './Controls';
-import SoundPads from './SoundPads';
 import './App.scss';
+import { Button } from 'reactstrap';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       power: true,
-      volume: 5,
+      volume: 10,
       screenInput: 'FCC Drum Machine!',
       soundBank: [
         {
@@ -51,13 +49,45 @@ class App extends Component {
         }
       ]
     }
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(e) {
+    this.setState({volume: e.target.value});
+  }
+
   render() {
+    const bank = this.state.soundBank.map((e,i) => {
+      const audio = new Audio(e.urlSound);
+      audio.volume = this.state.volume /   10;
+      return (
+        <Button className='drum-pad' id={e.key} key={i} onClick={()=>{audio.play()}}>
+          {e.key}
+        </Button>
+      );
+    });
+
     return (
       <div id='drum-machine' className='container'>
-          <Display screenInput={this.state.screenInput}/>
-          <Controls power={this.state.power} volume={this.state.volume}/>
-          <SoundPads soundBank={this.state.soundBank}/>
+
+          <div color="primary" id="display" className='display'>
+            <h2>{this.state.screenInput}</h2>
+          </div>
+
+          <div className="controls slidecontainer">
+            <input 
+              type="range" 
+              min="1" 
+              max="10" 
+              value={this.state.volume} 
+              className="slider"
+              onChange={this.handleChange} 
+              id="myRange">
+            </input>
+          </div>
+          
+          {bank}
+
       </div>
     );
   }
